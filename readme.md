@@ -1,0 +1,1 @@
+Desenvolvimento de jogo simples utilizando Vue e Bulma;

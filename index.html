@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matador de Monstros | VueJs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+    <div id="app" class="container">
+
+
+        <div class="panel mt-4">
+            <div class="columns">
+                <div class="column p-4 mx-2">
+                    <h4 class="title is-4">Jogador</h4>
+                    <progress class="progress is-primary" :value="playerHealth" max="100">{{playerHealth}}%</progress>
+                    <span>{{playerHealth}}%</span>
+                </div>
+                <div class="column p-4 mx-2">
+                    <h4 class="title is-4">Monstro</h4>
+                    <progress class="progress is-primary" :value="monsterHealth" max="100">{{monsterHealth}}%</progress>
+                    <span>{{monsterHealth}}%</span>
+                </div>
+              </div>
+        </div>
+
+
+        <template v-if="isGameOver">
+            <div class="notification" :class="result.cls">
+                {{result.txt}}
+            </div>
+        </template>
+
+
+        <div class="panel p-2">
+            <template v-if="isGameStarted">
+            
+                <button class="button is-danger" @click="attack(false)">Ataque</button>
+                <button class="button is-warning" @click="attack(true)">Ataque especial</button>
+                <button class="button is-success"  @click="heal">Curar</button>
+                <button class="button" @click="quit">Desistir</button>
+
+            </template>
+            <button v-else class="button is-info" @click="start">Iniciar novo jogo</button>
+        </div>
+
+
+
+        <div v-if="logs.length" class="panel p-3">
+            <h4 class="title is-5">Logs</h4>
+            <template v-for="log in logs">
+                <article class="message" :class="log.cls">
+                    <div class="message-header">
+                      <p>{{log.txt}}</p>
+                    </div>
+                </article>
+            </template>
+        </div>
+
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
